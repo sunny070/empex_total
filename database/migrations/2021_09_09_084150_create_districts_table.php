@@ -16,8 +16,8 @@ class CreateDistrictsTable extends Migration
     Schema::create('districts', function (Blueprint $table) {
       $table->id();
       $table->string('name');
-      // $table->foreignId('state_id')->cascade();
-      $table->foreignId('state_id')->constrained()->onDelete('cascade');
+      $table->foreignId('state_id')->cascade();
+      // $table->foreignId('state_id')->constrained()->onDelete('cascade');
       $table->string('district_code');
       $table->string('ncs_district_id')->nullable();
       $table->timestamps();

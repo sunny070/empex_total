@@ -1,9 +1,9 @@
 <div>
-    <div class="bg-white border p-5 rounded shadow-sm">
-        <div class="grid grid-cols-1 md:grid-cols-5 gap-2">
+    <div class="p-5 bg-white border rounded shadow-sm">
+        <div class="grid grid-cols-1 gap-2 md:grid-cols-5">
             <div>
                 <label class="text-xs">Category</label>
-                <select wire:model="category" class="w-full border border-empex-gray p-2 rounded">
+                <select wire:model="category" class="w-full p-2 border rounded border-empex-gray">
                     <option value="All">All Category</option>
                     <option value="Mizo">Mizo</option>
                     <option value="Non-Mizo">Non-Mizo</option>
@@ -14,7 +14,7 @@
 
             <div>
                 <label class="text-xs">District</label>
-                <select wire:model="district" class="w-full border border-empex-gray p-2 rounded">
+                <select wire:model="district" class="w-full p-2 border rounded border-empex-gray">
                     <option value="All">All District</option>
                     @foreach ($districts as $dist)
                     <option value="{{ $dist->id }}">{{ $dist->name }}</option>
@@ -24,7 +24,7 @@
 
             <div>
                 <label class="text-xs">Duration</label>
-                <select class="w-full border border-empex-gray p-2 rounded" wire:model="duration">
+                <select class="w-full p-2 border rounded border-empex-gray" wire:model="duration">
                     <option value="Custom">Custom</option>
                     <option value="Monthly">Monthly</option>
                     <option value="Quarterly">Quarterly</option>
@@ -37,10 +37,10 @@
             <div>
                 @if ($duration == 'Custom')
                 <label class="text-xs">From</label>
-                <input wire:model="from" type="date" class="w-full border border-empex-gray p-2 rounded">
+                <input wire:model="from" type="date" class="w-full p-2 border rounded border-empex-gray">
                 @elseif ($duration == 'Monthly')
                 <label class="text-xs">Month</label>
-                <select wire:model="month" class="w-full border border-empex-gray p-2 rounded">
+                <select wire:model="month" class="w-full p-2 border rounded border-empex-gray">
                     <option value="01">January</option>
                     <option value="02">February</option>
                     <option value="03">March</option>
@@ -56,7 +56,7 @@
                 </select>
                 @elseif ($duration == 'Quarterly')
                 <label class="text-xs">Quarterly</label>
-                <select wire:model="quarter" class="w-full border border-empex-gray p-2 rounded">
+                <select wire:model="quarter" class="w-full p-2 border rounded border-empex-gray">
                     <option value="01">1st Quarter</option>
                     <option value="02">2nd Quarter</option>
                     <option value="03">3rd Quarter</option>
@@ -64,7 +64,7 @@
                 </select>
                 @else
                 <label class="text-xs">Half Yearly</label>
-                <select wire:model="half" class="w-full border border-empex-gray p-2 rounded">
+                <select wire:model="half" class="w-full p-2 border rounded border-empex-gray">
                     <option value="01">1st Half</option>
                     <option value="02">2nd Half</option>
                 </select>
@@ -76,10 +76,10 @@
                 @if ($duration == 'Custom')
                 <label class="text-xs">To</label>
                 <input wire:model="to" min="{{ $this->from }}" type="date"
-                    class="w-full border border-empex-gray p-2 rounded">
+                    class="w-full p-2 border rounded border-empex-gray">
                 @else
                 <label class="text-xs">Year</label>
-                <select wire:model="year" class="w-full border border-empex-gray p-2 rounded">
+                <select wire:model="year" class="w-full p-2 border rounded border-empex-gray">
                     @foreach ($years as $yr)
                     <option value="{{ $yr }}">{{ $yr }}</option>
                     @endforeach
@@ -109,13 +109,13 @@
     </div>
 
     @if ($generated)
-    <div class="bg-white border p-5 rounded shadow-sm mt-5">
+    <div class="p-5 mt-5 bg-white border rounded shadow-sm">
         @if ($category == 'Education')
         <div class="flex justify-between mb-3">
             <div>Report Detail</div>
             <button wire:click="downloadEducation"
-                class="text-empex-green border brder-empex-green bg-white px-6 py-2 rounded hover:bg-empex-gray">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 pb-1 inline" fill="none" viewBox="0 0 24 24"
+                class="px-6 py-2 bg-white border rounded text-empex-green brder-empex-green hover:bg-empex-gray">
+                <svg xmlns="http://www.w3.org/2000/svg" class="inline w-6 h-6 pb-1" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round"
                         d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -126,8 +126,8 @@
 
         <div class="flex flex-col w-full">
             <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-                    <table class="table-auto w-full">
+                <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+                    <table class="w-full table-auto">
                         <tr class="border border-black">
                             <th class="text-center" colspan="8">
                                 REPORT OF EMPLOYMENT STATISTICS OF {{ $districtName }} DISTRICT EMPLOYMENT
@@ -152,10 +152,10 @@
                             </th>
                         </tr>
                         <tr class="border border-black">
-                            <td class="border border-black text-center" rowspan="2">Sl. No</td>
-                            <td class="border border-black text-center" rowspan="2">Category</td>
-                            <td class="border border-black text-center" rowspan="2">Subject</td>
-                            <td class="border border-black text-center" colspan="2">
+                            <td class="text-center border border-black" rowspan="2">Sl. No</td>
+                            <td class="text-center border border-black" rowspan="2">Category</td>
+                            <td class="text-center border border-black" rowspan="2">Subject</td>
+                            <td class="text-center border border-black" colspan="2">
                                 {{ $duration == 'Monthly'
                                 ? 'The Month'
                                 : ($duration == 'Quarterly'
@@ -168,89 +168,89 @@
                                 ? 'Custom'
                                 : '')))) }}
                             </td>
-                            <td class="border border-black text-center" rowspan="2">Total</td>
-                            <td class="border border-black text-center" colspan="2">Lapsed</td>
-                            <td class="border border-black text-center" rowspan="2">Total</td>
-                            <td class="border border-black text-center" colspan="2">Placed</td>
-                            <td class="border border-black text-center" rowspan="2">Total</td>
-                            <td class="border border-black text-center" colspan="2">Live Register</td>
-                            <td class="border border-black text-center" rowspan="2">Total</td>
+                            <td class="text-center border border-black" rowspan="2">Total</td>
+                            <td class="text-center border border-black" colspan="2">Lapsed</td>
+                            <td class="text-center border border-black" rowspan="2">Total</td>
+                            <td class="text-center border border-black" colspan="2">Placed</td>
+                            <td class="text-center border border-black" rowspan="2">Total</td>
+                            <td class="text-center border border-black" colspan="2">Live Register</td>
+                            <td class="text-center border border-black" rowspan="2">Total</td>
                         </tr>
                         <tr class="border border-black">
-                            <td class="border border-black text-center">Male</td>
-                            <td class="border border-black text-center">Female</td>
-                            <td class="border border-black text-center">Male</td>
-                            <td class="border border-black text-center">Female</td>
-                            <td class="border border-black text-center">Male</td>
-                            <td class="border border-black text-center">Female</td>
-                            <td class="border border-black text-center">Male</td>
-                            <td class="border border-black text-center">Female</td>
+                            <td class="text-center border border-black">Male</td>
+                            <td class="text-center border border-black">Female</td>
+                            <td class="text-center border border-black">Male</td>
+                            <td class="text-center border border-black">Female</td>
+                            <td class="text-center border border-black">Male</td>
+                            <td class="text-center border border-black">Female</td>
+                            <td class="text-center border border-black">Male</td>
+                            <td class="text-center border border-black">Female</td>
                         </tr>
                         @foreach ($educations as $quali)
-                        <tr class="border border-black text-center">
-                            <td class="border border-black text-center"
+                        <tr class="text-center border border-black">
+                            <td class="text-center border border-black"
                                 rowspan="{{ count($quali['subject']) > 0 ? count($quali['subject']) : '' }}">
                                 {{ $loop->iteration }}
                             </td>
-                            <td class="border border-black text-center"
+                            <td class="text-center border border-black"
                                 rowspan="{{ count($quali['subject']) > 0 ? count($quali['subject']) : '' }}">
                                 {{ $quali['name'] }}
                             </td>
                             @if (count($quali['subject']) == 0)
                             <td></td>
-                            <td class="border border-black text-center">
+                            <td class="text-center border border-black">
                                 {{ $quali['reports']['maleReport'] }}</td>
-                            <td class="border border-black text-center">
+                            <td class="text-center border border-black">
                                 {{ $quali['reports']['femaleReport'] }}</td>
-                            <td class="border border-black text-center">
+                            <td class="text-center border border-black">
                                 {{ $quali['reports']['totalReport'] }}</td>
-                            <td class="border border-black text-center">
+                            <td class="text-center border border-black">
                                 {{ $quali['reports']['maleLapsed'] }}</td>
-                            <td class="border border-black text-center">
+                            <td class="text-center border border-black">
                                 {{ $quali['reports']['femaleLapsed'] }}</td>
-                            <td class="border border-black text-center">
+                            <td class="text-center border border-black">
                                 {{ $quali['reports']['totalLapsed'] }}</td>
-                            <td class="border border-black text-center">
+                            <td class="text-center border border-black">
                                 {{ $quali['reports']['malePlaced'] }}</td>
-                            <td class="border border-black text-center">
+                            <td class="text-center border border-black">
                                 {{ $quali['reports']['femalePlaced'] }}</td>
-                            <td class="border border-black text-center">
+                            <td class="text-center border border-black">
                                 {{ $quali['reports']['totalPlaced'] }}</td>
-                            <td class="border border-black text-center">
+                            <td class="text-center border border-black">
                                 {{ $quali['reports']['maleLiveRegister'] }}</td>
-                            <td class="border border-black text-center">
+                            <td class="text-center border border-black">
                                 {{ $quali['reports']['femaleLiveRegister'] }}</td>
-                            <td class="border border-black text-center">
+                            <td class="text-center border border-black">
                                 {{ $quali['reports']['totalLiveRegister'] }}</td>
                             @else
                             @foreach ($quali['subject'] as $subIndex => $subj)
                             @if ($subIndex != 0)
-                        <tr class="border border-black text-center">
+                        <tr class="text-center border border-black">
                             @endif
-                            <td class="border border-black text-center">{{ $subj['name'] }}</td>
-                            <td class="border border-black text-center">
+                            <td class="text-center border border-black">{{ $subj['name'] }}</td>
+                            <td class="text-center border border-black">
                                 {{ $quali['reports'][$subIndex]['maleReport'] }}</td>
-                            <td class="border border-black text-center">
+                            <td class="text-center border border-black">
                                 {{ $quali['reports'][$subIndex]['femaleReport'] }}</td>
-                            <td class="border border-black text-center">
+                            <td class="text-center border border-black">
                                 {{ $quali['reports'][$subIndex]['totalReport'] }}</td>
-                            <td class="border border-black text-center">
+                            <td class="text-center border border-black">
                                 {{ $quali['reports'][$subIndex]['maleLapsed'] }}</td>
-                            <td class="border border-black text-center">
+                            <td class="text-center border border-black">
                                 {{ $quali['reports'][$subIndex]['femaleLapsed'] }}</td>
-                            <td class="border border-black text-center">
+                            <td class="text-center border border-black">
                                 {{ $quali['reports'][$subIndex]['totalLapsed'] }}</td>
-                            <td class="border border-black text-center">
+                            <td class="text-center border border-black">
                                 {{ $quali['reports'][$subIndex]['malePlaced'] }}</td>
-                            <td class="border border-black text-center">
+                            <td class="text-center border border-black">
                                 {{ $quali['reports'][$subIndex]['femalePlaced'] }}</td>
-                            <td class="border border-black text-center">
+                            <td class="text-center border border-black">
                                 {{ $quali['reports'][$subIndex]['totalPlaced'] }}</td>
-                            <td class="border border-black text-center">
+                            <td class="text-center border border-black">
                                 {{ $quali['reports'][$subIndex]['maleLiveRegister'] }}</td>
-                            <td class="border border-black text-center">
+                            <td class="text-center border border-black">
                                 {{ $quali['reports'][$subIndex]['femaleLiveRegister'] }}</td>
-                            <td class="border border-black text-center">
+                            <td class="text-center border border-black">
                                 {{ $quali['reports'][$subIndex]['totalLiveRegister'] }}</td>
                             @if ($subIndex != 0)
                         </tr>
@@ -260,21 +260,21 @@
                         </tr>
                         @endforeach
                         <tr>
-                            <td class="border-l border-b border-black"></td>
+                            <td class="border-b border-l border-black"></td>
                             <td class="border-b border-black"></td>
-                            <td class="border-b border-black text-center font-bold">Grand Total</td>
-                            <td class="border border-black text-center font-bold">{{ $maleReport }}</td>
-                            <td class="border border-black text-center font-bold">{{ $femaleReport }}</td>
-                            <td class="border border-black text-center font-bold">{{ $totalReport }}</td>
-                            <td class="border border-black text-center font-bold">{{ $maleLapsed }}</td>
-                            <td class="border border-black text-center font-bold">{{ $femaleLapsed }}</td>
-                            <td class="border border-black text-center font-bold">{{ $totalLapsed }}</td>
-                            <td class="border border-black text-center font-bold">{{ $malePlaced }}</td>
-                            <td class="border border-black text-center font-bold">{{ $femalePlaced }}</td>
-                            <td class="border border-black text-center font-bold">{{ $totalPlaced }}</td>
-                            <td class="border border-black text-center font-bold">{{ $maleLiveRegister }}</td>
-                            <td class="border border-black text-center font-bold">{{ $femaleLiveRegister }}</td>
-                            <td class="border border-black text-center font-bold">{{ $totalLiveRegister }}</td>
+                            <td class="font-bold text-center border-b border-black">Grand Total</td>
+                            <td class="font-bold text-center border border-black">{{ $maleReport }}</td>
+                            <td class="font-bold text-center border border-black">{{ $femaleReport }}</td>
+                            <td class="font-bold text-center border border-black">{{ $totalReport }}</td>
+                            <td class="font-bold text-center border border-black">{{ $maleLapsed }}</td>
+                            <td class="font-bold text-center border border-black">{{ $femaleLapsed }}</td>
+                            <td class="font-bold text-center border border-black">{{ $totalLapsed }}</td>
+                            <td class="font-bold text-center border border-black">{{ $malePlaced }}</td>
+                            <td class="font-bold text-center border border-black">{{ $femalePlaced }}</td>
+                            <td class="font-bold text-center border border-black">{{ $totalPlaced }}</td>
+                            <td class="font-bold text-center border border-black">{{ $maleLiveRegister }}</td>
+                            <td class="font-bold text-center border border-black">{{ $femaleLiveRegister }}</td>
+                            <td class="font-bold text-center border border-black">{{ $totalLiveRegister }}</td>
                         </tr>
                     </table>
                 </div>
@@ -284,8 +284,8 @@
         <div class="flex justify-between mb-3">
             <div>Report Detail</div>
             <button wire:click="downloadAllReport"
-                class="text-empex-green border brder-empex-green bg-white px-6 py-2 rounded hover:bg-empex-gray">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 pb-1 inline" fill="none" viewBox="0 0 24 24"
+                class="px-6 py-2 bg-white border rounded text-empex-green brder-empex-green hover:bg-empex-gray">
+                <svg xmlns="http://www.w3.org/2000/svg" class="inline w-6 h-6 pb-1" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round"
                         d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -298,12 +298,16 @@
             Preview is not available when selecting to All category, download file will contain all category in separate
             sheet!
         </div>
+
+
+
+
         @else
         <div class="flex justify-between mb-3">
             <div>Report Detail</div>
             <button wire:click="downloadReport"
-                class="text-empex-green border brder-empex-green bg-white px-6 py-2 rounded hover:bg-empex-gray">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 pb-1 inline" fill="none" viewBox="0 0 24 24"
+                class="px-6 py-2 bg-white border rounded text-empex-green brder-empex-green hover:bg-empex-gray">
+                <svg xmlns="http://www.w3.org/2000/svg" class="inline w-6 h-6 pb-1" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round"
                         d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -313,8 +317,8 @@
         </div>
         <div class="flex flex-col w-full">
             <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-                    <table class="table-auto w-full">
+                <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+                    <table class="w-full table-auto">
                         <tr class="border border-black">
                             <th class="text-center" colspan="8">
                                 REPORT OF EMPLOYMENT STATISTICS OF {{ $districtName }} DISTRICT EMPLOYMENT EXCHANGE
@@ -337,10 +341,10 @@
                             </th>
                         </tr>
                         <tr>
-                            <td class="border border-black text-center" rowspan="2">Sl. No</td>
-                            <td class="border border-black text-center" rowspan="2">Category</td>
-                            <td class="border border-black text-center" rowspan="2">Subject</td>
-                            <td class="border border-black text-center" colspan="2">
+                            <td class="text-center border border-black" rowspan="2">Sl. No</td>
+                            <td class="text-center border border-black" rowspan="2">Category</td>
+                            <td class="text-center border border-black" rowspan="2">Subject</td>
+                            <td class="text-center border border-black" colspan="2">
                                 {{ $duration == 'Monthly'
                                 ? 'The Month'
                                 : ($duration == 'Quarterly'
@@ -353,62 +357,62 @@
                                 ? 'Custom'
                                 : '')))) }}
                             </td>
-                            <td class="border border-black text-center" rowspan="2">Total</td>
-                            <td class="border border-black text-center" colspan="2">Lapsed</td>
-                            <td class="border border-black text-center" rowspan="2">Total</td>
-                            <td class="border border-black text-center" colspan="2">Placed</td>
-                            <td class="border border-black text-center" rowspan="2">Total</td>
-                            <td class="border border-black text-center" colspan="2">Live Register</td>
-                            <td class="border border-black text-center" rowspan="2">Total</td>
+                            <td class="text-center border border-black" rowspan="2">Total</td>
+                            <td class="text-center border border-black" colspan="2">Lapsed</td>
+                            <td class="text-center border border-black" rowspan="2">Total</td>
+                            <td class="text-center border border-black" colspan="2">Placed</td>
+                            <td class="text-center border border-black" rowspan="2">Total</td>
+                            <td class="text-center border border-black" colspan="2">Live Register</td>
+                            <td class="text-center border border-black" rowspan="2">Total</td>
                         </tr>
                         <tr>
-                            <td class="border border-black text-center">Male</td>
-                            <td class="border border-black text-center">Female</td>
-                            <td class="border border-black text-center">Male</td>
-                            <td class="border border-black text-center">Female</td>
-                            <td class="border border-black text-center">Male</td>
-                            <td class="border border-black text-center">Female</td>
-                            <td class="border border-black text-center">Male</td>
-                            <td class="border border-black text-center">Female</td>
+                            <td class="text-center border border-black">Male</td>
+                            <td class="text-center border border-black">Female</td>
+                            <td class="text-center border border-black">Male</td>
+                            <td class="text-center border border-black">Female</td>
+                            <td class="text-center border border-black">Male</td>
+                            <td class="text-center border border-black">Female</td>
+                            <td class="text-center border border-black">Male</td>
+                            <td class="text-center border border-black">Female</td>
                         </tr>
                         @foreach ($reports as $index => $report)
                         <tr>
-                            <td class="border border-black text-center">{{ $index + 1 }}</td>
+                            <td class="text-center border border-black">{{ $index + 1 }}</td>
                             @if ($index == 0)
-                            <td class="border border-black text-center" rowspan="{{ count($reports) }}">
+                            <td class="text-center border border-black" rowspan="{{ count($reports) }}">
                                 {{ $category }}</td>
                             @endif
-                            <td class="border border-black text-center">{{ $report['category'] }}</td>
-                            <td class="border border-black text-center">{{ $report['maleReport'] }}</td>
-                            <td class="border border-black text-center"> {{ $report['femaleReport'] }}</td>
-                            <td class="border border-black text-center">{{ $report['totalReport'] }}</td>
-                            <td class="border border-black text-center">{{ $report['maleLapsed'] }}</td>
-                            <td class="border border-black text-center"> {{ $report['femaleLapsed'] }}</td>
-                            <td class="border border-black text-center">{{ $report['totalLapsed'] }}</td>
-                            <td class="border border-black text-center">{{ $report['malePlaced'] }}</td>
-                            <td class="border border-black text-center"> {{ $report['femalePlaced'] }}</td>
-                            <td class="border border-black text-center">{{ $report['totalPlaced'] }}</td>
-                            <td class="border border-black text-center">{{ $report['maleLiveRegister'] }}</td>
-                            <td class="border border-black text-center"> {{ $report['femaleLiveRegister'] }}</td>
-                            <td class="border border-black text-center">{{ $report['totalLiveRegister'] }}</td>
+                            <td class="text-center border border-black">{{ $report['category'] }}</td>
+                            <td class="text-center border border-black">{{ $report['maleReport'] }}</td>
+                            <td class="text-center border border-black"> {{ $report['femaleReport'] }}</td>
+                            <td class="text-center border border-black">{{ $report['totalReport'] }}</td>
+                            <td class="text-center border border-black">{{ $report['maleLapsed'] }}</td>
+                            <td class="text-center border border-black"> {{ $report['femaleLapsed'] }}</td>
+                            <td class="text-center border border-black">{{ $report['totalLapsed'] }}</td>
+                            <td class="text-center border border-black">{{ $report['malePlaced'] }}</td>
+                            <td class="text-center border border-black"> {{ $report['femalePlaced'] }}</td>
+                            <td class="text-center border border-black">{{ $report['totalPlaced'] }}</td>
+                            <td class="text-center border border-black">{{ $report['maleLiveRegister'] }}</td>
+                            <td class="text-center border border-black"> {{ $report['femaleLiveRegister'] }}</td>
+                            <td class="text-center border border-black">{{ $report['totalLiveRegister'] }}</td>
                         </tr>
                         @endforeach
                         <tr>
-                            <td class="border-l border-b border-black"></td>
+                            <td class="border-b border-l border-black"></td>
                             <td class="border-b border-black"></td>
-                            <td class="border-b border-black text-center font-bold">Grand Total</td>
-                            <td class="border border-black text-center font-bold">{{ $maleReport }}</td>
-                            <td class="border border-black text-center font-bold">{{ $femaleReport }}</td>
-                            <td class="border border-black text-center font-bold">{{ $totalReport }}</td>
-                            <td class="border border-black text-center font-bold">{{ $maleLapsed }}</td>
-                            <td class="border border-black text-center font-bold">{{ $femaleLapsed }}</td>
-                            <td class="border border-black text-center font-bold">{{ $totalLapsed }}</td>
-                            <td class="border border-black text-center font-bold">{{ $malePlaced }}</td>
-                            <td class="border border-black text-center font-bold">{{ $femalePlaced }}</td>
-                            <td class="border border-black text-center font-bold">{{ $totalPlaced }}</td>
-                            <td class="border border-black text-center font-bold">{{ $maleLiveRegister }}</td>
-                            <td class="border border-black text-center font-bold">{{ $femaleLiveRegister }}</td>
-                            <td class="border border-black text-center font-bold">{{ $totalLiveRegister }}</td>
+                            <td class="font-bold text-center border-b border-black">Grand Total</td>
+                            <td class="font-bold text-center border border-black">{{ $maleReport }}</td>
+                            <td class="font-bold text-center border border-black">{{ $femaleReport }}</td>
+                            <td class="font-bold text-center border border-black">{{ $totalReport }}</td>
+                            <td class="font-bold text-center border border-black">{{ $maleLapsed }}</td>
+                            <td class="font-bold text-center border border-black">{{ $femaleLapsed }}</td>
+                            <td class="font-bold text-center border border-black">{{ $totalLapsed }}</td>
+                            <td class="font-bold text-center border border-black">{{ $malePlaced }}</td>
+                            <td class="font-bold text-center border border-black">{{ $femalePlaced }}</td>
+                            <td class="font-bold text-center border border-black">{{ $totalPlaced }}</td>
+                            <td class="font-bold text-center border border-black">{{ $maleLiveRegister }}</td>
+                            <td class="font-bold text-center border border-black">{{ $femaleLiveRegister }}</td>
+                            <td class="font-bold text-center border border-black">{{ $totalLiveRegister }}</td>
                         </tr>
                     </table>
                 </div>

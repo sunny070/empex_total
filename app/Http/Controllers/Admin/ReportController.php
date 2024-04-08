@@ -9,14 +9,14 @@ use Illuminate\Http\Request;
 
 class ReportController extends Controller
 {
-    // public function getTotalRegistration()
-    // {
-    //     if (auth()->guard('admin')->user()->role_id != 1) {
-    //         abort(401);
-    //     }
+    public function getTotalRegistration()
+    {
+        if (auth()->guard('admin')->user()->role_id != 1) {
+            abort(401);
+        }
 
-    //     return view('admin.reports.totalRegistrationReport');
-    // }
+        return view('admin.reports.totalRegistrationReport');
+    }
     public function getReport()
     {
         if (auth()->guard('admin')->user()->role_id != 1) {

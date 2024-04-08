@@ -57,15 +57,15 @@ class BasicInfo extends Model
     return $this->belongsTo(District::class);
   }
 
-  public function latest_education()
-  {
-    return $this->belongsTo(EducationQualification::class, 'user_id', 'user_id')->latest();
-  }
+  // public function latest_education()
+  // {
+  //   return $this->belongsTo(EducationQualification::class, 'user_id', 'user_id')->latest();
+  // }
 
   public function education()
-  {
+{
     return $this->hasMany(EducationQualification::class, 'user_id', 'user_id');
-  }
+}
 
   public function permanent_address()
   {

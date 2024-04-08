@@ -29,7 +29,7 @@ class EducationQualification extends Model
 
   public function qualification()
   {
-    return $this->belongsTo(Qualification::class);
+      return $this->belongsTo(Qualification::class, 'qualification_id');
   }
 
   public function subject()

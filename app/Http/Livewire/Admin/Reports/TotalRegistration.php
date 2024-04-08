@@ -1050,7 +1050,7 @@ class TotalRegistration extends Component
         $qualifications = Qualification::get();
 
         foreach ($qualifications as $quali) {
-            $userIds = EducationQualification::max()->where('qualification_id', $quali->id)->pluck('user_id');
+            $userIds = EducationQualification::where('qualification_id', $quali->id)->pluck('user_id');
             $maleInReport = BasicInfo::whereIn('user_id', $userIds)
                 ->where('status', 'Approved')
                 ->where('is_archive', 0)
