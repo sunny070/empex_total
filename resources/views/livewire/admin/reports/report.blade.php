@@ -12,7 +12,7 @@
                 <option value="all">All</option>
                 <option value="Mizo">Mizo</option>
                 <option value="Non-Mizo">Non-Mizo</option>
-                <option value="Non-Mizo">Physically Handicapped</option>
+                <option value="Physically Handicapped">Physically Handicapped</option>
                 {{-- <option value="Non-Mizo">Non-Miz</option> --}}
 
             </select>
@@ -69,6 +69,7 @@
     <div class="py-10">
         {{-- @if($generated)
             <p>Report generated successfully!</p> --}}
+            @if($category == "Mizo")
             <table style="border-collapse: collapse; width: 100%; text-align: center; background:#FFF py-10">
                 <thead>
                     <tr>
@@ -100,13 +101,15 @@
                             @endif
                         </td>
                         <td style="border: 1px solid black;">{{ $info->gender }}</td>
+                        <td style="border: 1px solid black;">{{ $info->user_id }}</td>
                         
                        
                     </tr>
                     @endforeach
         
                     <!-- Additional rows for users from the PhysicalChallenge category -->
-                    {{-- @if($category == "Physically Challenge")
+                    
+                    @elseif ($category == "Physically Handicapped")
                         @foreach($physicallyChallengedUsers as $physicallyChallengedUser)
                             <tr>
                                 <td>{{ $physicallyChallengedUser->id }}</td>
@@ -120,7 +123,7 @@
                                 <td></td>
                             </tr>
                         @endforeach
-                    @endif --}}
+                    @endif
                 </tbody>
             </table>
     </div>

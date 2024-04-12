@@ -43,3 +43,5 @@
     // {
     //     // Logic to generate report based on other categories
     // }
+    https://chat.openai.com/share/b432d8d9-34e4-4d0a-ba4b-6faac47411bb
+    https://chat.openai.com/share/460c029c-42df-4a74-9b88-f6efb1ec51da
