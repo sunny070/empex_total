@@ -1,0 +1,45 @@
+ // public function generateReport()
+    // {
+    //     switch ($this->category) {
+    //         case 'Education':
+    //             $this->generateEducationReport();
+    //             break;
+    //         case 'All':
+    //             $this->generateAllReport();
+    //             break;
+    //         case 'Physically Handicapped':
+    //             $this->generateHandicappedReport();
+    //             break;
+    //         default:
+    //             $this->generateCastReport($this->category);
+    //     }
+
+    //     $this->generated = true;
+    //     $this->buttonEnable = false;
+    // }
+
+    // // Your report generation methods go here...
+
+    // private function generateEducationReport()
+    // {
+    //     // Logic to generate education report
+    // }
+
+    // private function generateAllReport()
+    // {
+    //     // Logic to generate all report
+    // }
+
+    // private function generateHandicappedReport()
+    // {
+    //     // Logic to generate physically handicapped report
+    //     $physicallyChallengedUsers = [];
+    //     if ($this->category === 'Physically Challenge') {
+    //         $physicallyChallengedUsers = UserPhysicalChallenge::all();
+    //     }
+    // }
+
+    // private function generateCastReport($category)
+    // {
+    //     // Logic to generate report based on other categories
+    // }
