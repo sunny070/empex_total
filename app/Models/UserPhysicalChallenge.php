@@ -16,6 +16,12 @@ class UserPhysicalChallenge extends Model
 
   public function physicalChallenge()
   {
-    return $this->belongsTo(PhysicalChallenge::class);
+      return $this->belongsTo(PhysicalChallenge::class, 'physical_challenge_id');
   }
+  // added
+  // public function basicInfos()
+  // {
+  //     return $this->belongsTo(BasicInfo::class, 'physically_challenge');
+  // }
+  
 }

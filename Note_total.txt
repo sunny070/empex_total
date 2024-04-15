@@ -1,0 +1,106 @@
+@if($category == "Mizo")
+        <table style="border-collapse: collapse; width: 100%; text-align: center; background:#FFF py-10">
+            <thead>
+                <tr>
+                    <th style="border: 1px solid black;">Serial Number</th>
+                    <th style="border: 1px solid black;">Name</th>
+                    <th style="border: 1px solid black;">Category</th>
+                    <th style="border: 1px solid black;">Qualification</th>
+                    <th style="border: 1px solid black;">Gender</th>
+                    <th style="border: 1px solid black;">User ID</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($data as $index => $info)
+                <tr>
+                    <td style="border: 1px solid black;">{{ $index + 1 }}</td>
+                    <td style="border: 1px solid black;">{{ $info->full_name }}</td>
+                    <td style="border: 1px solid black;">{{ $category }}</td>
+                    <td style="border: 1px solid black;">
+                        @if ($info->education)
+                        @if ($info->education instanceof \Illuminate\Support\Collection)
+                        @foreach ($info->education as $education)
+                        {{ $education->qualification->name }}<br>
+                        @endforeach
+                        @else
+                        {{ $info->education->qualification }}
+                        @endif
+                        @endif
+                    </td>
+                    <td style="border: 1px solid black;">{{ $info->gender }}</td>
+                    <td style="border: 1px solid black;">{{ $info->user_id }}</td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+        @elseif($category == "Non-Mizo")
+        <table style="border-collapse: collapse; width: 100%; text-align: center; background:#FFF py-10">
+            <thead>
+                <tr>
+                    <th style="border: 1px solid black;">Serial Number</th>
+                    <th style="border: 1px solid black;">Name</th>
+                    <th style="border: 1px solid black;">Category</th>
+                    <th style="border: 1px solid black;">Qualification</th>
+                    <th style="border: 1px solid black;">Gender</th>
+                    <th style="border: 1px solid black;">User ID</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($data as $index => $info)
+                <tr>
+                    <td style="border: 1px solid black;">{{ $index + 1 }}</td>
+                    <td style="border: 1px solid black;">{{ $info->full_name }}</td>
+                    <td style="border: 1px solid black;">{{ $category }}</td>
+                    <td style="border: 1px solid black;">
+                        @if ($info->education)
+                        @if ($info->education instanceof \Illuminate\Support\Collection)
+                        @foreach ($info->education as $education)
+                        {{ $education->qualification->name }}<br>
+                        @endforeach
+                        @else
+                        {{ $info->education->qualification }}
+                        @endif
+                        @endif
+                    </td>
+                    <td style="border: 1px solid black;">{{ $info->gender }}</td>
+                    <td style="border: 1px solid black;">{{ $info->user_id }}</td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+        @elseif($category == "all")
+        <table style="border-collapse: collapse; width: 100%; text-align: center; background:#FFF py-10">
+            <thead>
+                <tr>
+                    <th style="border: 1px solid black;">Serial Number</th>
+                    <th style="border: 1px solid black;">Name</th>
+                    <th style="border: 1px solid black;">Category</th>
+                    <th style="border: 1px solid black;">Qualification</th>
+                    <th style="border: 1px solid black;">Gender</th>
+                    <th style="border: 1px solid black;">User ID</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($data as $index => $info)
+                <tr>
+                    <td style="border: 1px solid black;">{{ $index + 1 }}</td>
+                    <td style="border: 1px solid black;">{{ $info->full_name }}</td>
+                    <td style="border: 1px solid black;">{{ $category }}</td>
+                    <td style="border: 1px solid black;">
+                        @if ($info->education)
+                        @if ($info->education instanceof \Illuminate\Support\Collection)
+                        @foreach ($info->education as $education)
+                        {{ $education->qualification->name }}<br>
+                        @endforeach
+                        @else
+                        {{ $info->education->qualification }}
+                        @endif
+                        @endif
+                    </td>
+                    <td style="border: 1px solid black;">{{ $info->gender }}</td>
+                    <td style="border: 1px solid black;">{{ $info->user_id }}</td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+        @endif

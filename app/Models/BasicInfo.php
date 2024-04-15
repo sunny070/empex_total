@@ -31,7 +31,7 @@ class BasicInfo extends Model
     'society',
   ];
 
-  protected $dates = ['card_valid_from','card_valid_till'];
+  protected $dates = ['card_valid_from', 'card_valid_till'];
 
 
 
@@ -42,9 +42,28 @@ class BasicInfo extends Model
     return $this->belongsTo(User::class);
   }
 
+
+
+
+  // added
+  public function userPhysicalChallenge()
+  {
+      return $this->hasMany(UserPhysicalChallenge::class, 'user_id');
+  }
+  
+
+
+
+
+  public function physicalChallenge()
+  {
+    return $this->belongsTo(PhysicalChallenge::class, 'physically_challenge');
+  }
+
+
   public function expireBasicInfo()
   {
-    return $this->hasMany(ExpireBasicInfo::class,'basic_info_id','id');
+    return $this->hasMany(ExpireBasicInfo::class, 'basic_info_id', 'id');
   }
 
   public function religion()
@@ -63,14 +82,12 @@ class BasicInfo extends Model
   // }
 
   public function education()
-{
+  {
     return $this->hasMany(EducationQualification::class, 'user_id', 'user_id');
-}
+  }
 
   public function permanent_address()
   {
     return $this->belongsTo(Address::class, 'user_id', 'user_id')->where('type', 'permanent');
   }
-
-
 }

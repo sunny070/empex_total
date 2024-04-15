@@ -12,4 +12,10 @@ class PhysicalChallenge extends Model
   protected $fillable = [
     'name',
   ];
+
+  // public function userPhysicalChallenge()
+  // {
+  //     return $this->hasOne(UserPhysicalChallenge::class, 'physically_challenge');
+  // }
+
 }
