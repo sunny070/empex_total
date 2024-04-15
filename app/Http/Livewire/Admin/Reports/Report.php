@@ -31,71 +31,70 @@ class Report extends Component
     public $month;
     public $generated = false; // Flag to indicate if report is generated
     public $buttonEnable = true; // Flag to control button visibility
-    public $data;
-    public $physicallyChallengedUsers=[];
 
-//     public function generateReport()
-//     {
-//         switch ($this->category) {
-//             case 'Education':
-//                 $this->generateEducationReport();
-//                 break;
-//             case 'All':
-//                 $this->generateAllReport();
-//                 break;
-//             case 'Physically Handicapped':
-//                 $this->generateHandicappedReport();
-//                 break;
-//             default:
-//                 $this->generateCastReport($this->category);
-//         }
-//     }
-//   private function generateHandicappedReport()
-//     {
-//         // Logic to generate physically handicapped report
-        
-//          // Retrieve districts
-//     $districts = District::all();
+    public function generateReport()
+    {
+        switch ($this->category) {
+            case 'Education':
+                $this->generateEducationReport();
+                break;
+            case 'All':
+                $this->generateAllReport();
+                break;
+            case 'Physically Handicapped':
+                $this->generateHandicappedReport();
+                break;
+            default:
+                $this->generateCastReport($this->category);
+        }
+    }
+  private function generateHandicappedReport()
+    {
+        // Logic to generate physically handicapped report
+        $physicallyChallengedUsers = [];
+        if ($this->category === 'Physically Handicapped') {
+            $physicallyChallengedUsers = UserPhysicalChallenge::all();
+        }
 
-//     // Initialize query builder
-//     $query = BasicInfo::query()->with(['education', 'district']);
+        // Retrieve districts
+        $districts = District::all();
 
-//     // Modify query based on filter criteria
-//     if ($this->category !== 'all') {
-//         if ($this->category === 'Physically Handicapped') {
-//             $query->whereIn('user_id', function ($subquery) {
-//                 $subquery->select('user_id')->from('physical_challenges');
-//             });
-//         } else {
-//             $query->where('physically_challenge', $this->category);
-//         }
-//     }
+        // Initialize query builder
+        $query = BasicInfo::query()->with(['education', 'district']);
 
-//     // Apply district filter
-//     if ($this->district !== 'all') {
-//         $query->whereHas('district', function ($q) {
-//             $q->where('name', $this->district);
-//         });
-//     }
+        // Modify query based on filter criteria
+        if ($this->category !== 'all') {
+            if ($this->category === 'Physically Handicapped') {
+                $query->whereIn('user_id', function ($subquery) {
+                    $subquery->select('user_id')->from('physical_challenges');
+                });
+            } else {
+                $query->where('physically_challenge', $this->category);
+            }
+        }
 
-//     // Apply duration filter
-//     if ($this->duration === 'monthly') {
-//         $query->whereMonth('created_at', $this->month);
-//     } elseif ($this->duration === 'yearly' && $this->selectedYear) {
-//         $query->whereYear('created_at', $this->selectedYear);
-//     }
+        // Apply district filter
+        if ($this->district !== 'all') {
+            $query->whereHas('district', function ($q) {
+                $q->where('name', $this->district);
+            });
+        }
 
-//     // Add additional conditions
-//     $query->where('status', 'Approved')->where('is_archive', 0);
+        // Apply duration filter
+        if ($this->duration === 'monthly') {
+            $query->whereMonth('created_at', $this->month);
+        } elseif ($this->duration === 'yearly' && $this->selectedYear) {
+            $query->whereYear('created_at', $this->selectedYear);
+        }
 
-//     // Retrieve paginated data
-//     $this->data = $query->paginate(10);
-//     // Retrieve physically challenged users separately if the category is 'Physically Handicapped'
-    
-//     if ($this->category === 'Physically Handicapped') {
-//         $this->physicallyChallengedUsers = UserPhysicalChallenge::all();
-//     }
-//     }
+        // Add additional conditions
+        $query->where('status', 'Approved')->where('is_archive', 0);
+
+        // Retrieve paginated data
+        $data = $query->paginate(10);
+
+        return view('livewire.admin.reports.report', compact('data', 'districts', 'physicallyChallengedUsers'));
+    }
 
     public function mount()
     {

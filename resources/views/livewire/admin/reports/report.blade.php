@@ -12,7 +12,7 @@
                 <option value="all">All</option>
                 <option value="Mizo">Mizo</option>
                 <option value="Non-Mizo">Non-Mizo</option>
-                <option value="Physically Challenge">Physically Handicapped</option>
+                <option value="Physically Handicapped">Physically Handicapped</option>
                 {{-- <option value="Non-Mizo">Non-Miz</option> --}}
 
             </select>
@@ -69,60 +69,59 @@
     <div class="py-10">
         {{-- @if($generated)
             <p>Report generated successfully!</p> --}}
+            @if($category == "Mizo")
             <table style="border-collapse: collapse; width: 100%; text-align: center; background:#FFF py-10">
                 <thead>
-                    @if($category == "Mizo")
                     <tr>
                         <th style="border: 1px solid black;">Serial Number</th>
                         <th style="border: 1px solid black;">Name</th>
                         <th style="border: 1px solid black;">Category</th>
                         <th style="border: 1px solid black;">Qualification</th>
                         <th style="border: 1px solid black;">Gender</th>
+                        {{-- <th style="border: 1px solid black;">Female</th>
+                        <th style="border: 1px solid black;">Others</th> --}}
+                        
                     </tr>
-                    @elseif ($category == "Physically Handicapped")
-                    <tr>
-                        <th style="border: 1px solid black;">Serial Number</th>
-                        <th style="border: 1px solid black;">Name</th>
-                        <th style="border: 1px solid black;">Category</th>
-                        <th style="border: 1px solid black;">Qualification</th>
-                        <th style="border: 1px solid black;">Gender</th>
-                    </tr>
-                    @endif
                 </thead>
                 <tbody>
-                    @if($category == "Mizo")
-                        @foreach($data as $index => $info)
-                        <tr>
-                            <td style="border: 1px solid black;">{{ $index + 1 }}</td>
-                            <td style="border: 1px solid black;">{{ $info->full_name }}</td>
-                            <td style="border: 1px solid black;">{{ $category }}</td>
-                            <td style="border: 1px solid black;">
-                                @if ($info->education)
-                                    @if ($info->education instanceof \Illuminate\Support\Collection)
-                                        @foreach ($info->education as $education)
-                                            {{ $education->qualification->name }}<br>
-                                        @endforeach
-                                    @else
-                                        {{ $info->education->qualification }}
-                                    @endif
+                    @foreach($data as $index => $info)
+                    <tr>
+                        <td style="border: 1px solid black;">{{ $index + 1 }}</td>
+                        <td style="border: 1px solid black;">{{ $info->full_name }}</td>
+                        <td style="border: 1px solid black;">{{ $category }}</td>
+                        <td style="border: 1px solid black;">
+                            @if ($info->education)
+                                @if ($info->education instanceof \Illuminate\Support\Collection)
+                                    @foreach ($info->education as $education)
+                                        {{ $education->qualification->name }}<br>
+                                    @endforeach
+                                @else
+                                    {{ $info->education->qualification }}
                                 @endif
-                            </td>
-                            <td style="border: 1px solid black;">{{ $info->gender }}</td>
-                        </tr>
-                        @endforeach
-                    @endif
-            
+                            @endif
+                        </td>
+                        <td style="border: 1px solid black;">{{ $info->gender }}</td>
+                        <td style="border: 1px solid black;">{{ $info->user_id }}</td>
+                        
+                       
+                    </tr>
+                    @endforeach
+        
                     <!-- Additional rows for users from the PhysicalChallenge category -->
-                    @if($category == "Physically Handicapped")
+                    
+                    @elseif ($category == "Physically Handicapped")
                         @foreach($physicallyChallengedUsers as $physicallyChallengedUser)
-                        <tr>
-                            <td>{{ $physicallyChallengedUser->id }}</td>
-                            <td>{{ $physicallyChallengedUser->name }}</td>
-                            <!-- Add other columns as needed -->
-                            <td>Physically Handicapped</td>
-                            <td></td>
-                            <td></td>
-                        </tr>
+                            <tr>
+                                <td>{{ $physicallyChallengedUser->id }}</td>
+                                <td>{{ $physicallyChallengedUser->name }}</td>
+                                <!-- Add other columns as needed -->
+                                <td>Physically Handicapped</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
                         @endforeach
                     @endif
                 </tbody>
