@@ -48,11 +48,14 @@ class BasicInfo extends Model
   // added
   public function userPhysicalChallenge()
   {
-      return $this->hasMany(UserPhysicalChallenge::class, 'user_id');
+      return $this->hasMany(UserPhysicalChallenge::class,'user_id', 'user_id' );
   }
   
 
-
+  public function education()
+  {
+    return $this->hasMany(EducationQualification::class, 'user_id', 'user_id');
+  }
 
 
   public function physicalChallenge()
@@ -81,10 +84,7 @@ class BasicInfo extends Model
   //   return $this->belongsTo(EducationQualification::class, 'user_id', 'user_id')->latest();
   // }
 
-  public function education()
-  {
-    return $this->hasMany(EducationQualification::class, 'user_id', 'user_id');
-  }
+  
 
   public function permanent_address()
   {

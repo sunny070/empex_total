@@ -11,6 +11,7 @@ use Livewire\WithPagination;
 use App\Models\Qualification;
 use App\Models\PhysicalChallenge;
 // use Livewire\Component;
+use App\Exports\TotalReportExport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Models\UserPhysicalChallenge;
 use App\Models\EducationQualification;
@@ -76,18 +77,7 @@ class Report extends Component
                 $query->where('society', $this->category);
             }
         }
-        // Execute the query
-        // $results = $query->get();
-        // foreach ($results as $basicInfo) {
-        //     foreach ($basicInfo->userPhysicalChallenge as $userPhysicalChallenge) {
-        //         $physicalChallengeName = $userPhysicalChallenge->physicalChallenge->name;
-        //         // Now you have the name of the physical challenge associated with this user
-        //     }
-        // }
-        // dd($physicalChallengeName);
         
-
-
         // Apply district filter
         if ($this->district !== 'all') {
             $query->whereHas('district', function ($q) {
@@ -107,7 +97,7 @@ class Report extends Component
 
         // Retrieve paginated data
         $data = $query->paginate(10);
-
+// dd($data);
 
 
 
@@ -124,6 +114,94 @@ class Report extends Component
         $this->years = array_reverse($this->years);
         $currentYear = Carbon::now()->year;
         return range($currentYear, $currentYear - 10, -1);
+    }
+
+
+    public function exportToExcel()
+    {
+        $data = $this->prepareData(); // Assuming you have a method to prepare the data
+
+        // Export data to Excel using Laravel Excel
+        return Excel::download(new TotalReportExport($data), 'report.xlsx');
+    }
+    private function prepareData()
+    {
+        // Build the query to retrieve the data based on the current filters
+        $query = BasicInfo::query()
+            ->with(['education', 'userPhysicalChallenge'])
+            ->where('status', 'Approved')
+            ->where('is_archive', 0);
+    
+        // Apply category filter
+        if ($this->category !== 'all') {
+            if ($this->category === 'Physically Challenge') {
+                $query->where('physically_challenge', 1);
+            } elseif ($this->category === 'Mizo') {
+                $query->where('society', $this->category);
+            } elseif ($this->category === 'Non-Mizo') {
+                $query->where('society', '!=', 'Mizo');
+            } else {
+                $query->where('society', $this->category);
+            }
+        }
+    
+        // Apply district filter
+        if ($this->district !== 'all') {
+            $query->whereHas('district', function ($q) {
+                $q->where('name', $this->district);
+            });
+        }
+    
+        // Apply duration filter
+        if ($this->duration === 'monthly') {
+            $query->whereMonth('created_at', $this->month);
+        } elseif ($this->duration === 'yearly' && $this->selectedYear) {
+            $query->whereYear('created_at', $this->selectedYear);
+        }
+    
+        // Retrieve the paginated data
+        $data = $query->get();
+    
+        // Prepare data for export
+        $preparedData = collect();
+    
+        foreach ($data as $index => $info) {
+            $rowData = [
+                'Serial Number' => $index + 1,
+                'Name' => $info->full_name,
+                'Category' => '',
+                'Qualification' => '',
+                'Gender' => $info->gender,
+                'User ID' => $info->user_id,
+            ];
+    
+            // Prepare Category
+            $categories = [];
+            foreach ($info->userPhysicalChallenge as $userPhysicalChallenge) {
+                if ($userPhysicalChallenge->physicalChallenge) {
+                    $categories[] = $userPhysicalChallenge->physicalChallenge->name;
+                } else {
+                    $categories[] = 'Not Mentioned';
+                }
+            }
+            $rowData['Category'] = implode(', ', $categories);
+    
+            // Prepare Qualification
+            $qualifications = [];
+            if ($info->education) {
+                foreach ($info->education as $education) {
+                    if ($education->qualification) {
+                        $qualifications[] = $education->qualification->name;
+                    }
+                }
+            }
+            $rowData['Qualification'] = implode(', ', $qualifications);
+    
+            // Add the prepared row to the collection
+            $preparedData->push($rowData);
+        }
+    
+        return $preparedData;
     }
     // public function render()
     // {

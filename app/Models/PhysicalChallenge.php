@@ -13,9 +13,9 @@ class PhysicalChallenge extends Model
     'name',
   ];
 
-  // public function userPhysicalChallenge()
-  // {
-  //     return $this->hasOne(UserPhysicalChallenge::class, 'physically_challenge');
-  // }
+  public function userPhysicalChallenge()
+  {
+      return $this->hasMany(UserPhysicalChallenge::class, 'physical_challenge_id');
+  }
 
 }
